@@ -80,7 +80,6 @@ public class UserMealsUtil {
         // TODO Implement by streams
         //Map<LocalDate,Integer> map = meals.stream().collect(Collectors.toMap(x -> x.getDateTime().toLocalDate(), x -> x.getCalories(),(x,y) -> x+y));
         //Map<LocalDate,Integer> map = meals.stream().collect(Collectors.groupingBy(UserMeal::getLocalDate, Collectors.summingInt(UserMeal::getCalories)));
-        System.out.println("hello world!");
         Map<LocalDate,Integer> map = meals.stream().collect(Collectors.toMap(UserMeal::getLocalDate, UserMeal::getCalories,Integer::sum));
 
         return meals.stream().filter(x -> TimeUtil.isBetweenHalfOpen(x.getDateTime().toLocalTime(),startTime,endTime))
