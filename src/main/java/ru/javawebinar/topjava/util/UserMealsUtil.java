@@ -87,9 +87,7 @@ public class UserMealsUtil {
         Map<LocalDate,Integer> map = meals.stream().collect(Collectors.toMap(UserMeal::getLocalDate, UserMeal::getCalories,Integer::sum));
 
         return meals.stream().filter(x -> TimeUtil.isBetweenHalfOpen(x.getDateTime().toLocalTime(),startTime,endTime))
-                .map(meal -> {
-                    boolean excess = map.get(meal.getLocalDate()) > caloriesPerDay ? true : false;
-                    return new UserMealWithExcess(meal.getDateTime(),meal.getDescription(),meal.getCalories(),excess);
-                }).collect(Collectors.toList());
+                .map(meal -> new UserMealWithExcess(meal.getDateTime(),meal.getDescription(),meal.getCalories(),map.get(meal.getLocalDate()) > caloriesPerDay))
+                .collect(Collectors.toList());
     }
 }
