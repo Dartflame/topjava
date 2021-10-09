@@ -11,7 +11,6 @@ import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class MealsUtil {
@@ -63,17 +62,14 @@ public class MealsUtil {
         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
                 .collect(Collectors.toMap(Meal::getDate, Meal::getCalories, Integer::sum));
 
-        List<MealTo> result = meals.stream()
+        return meals.stream()
                 .map(meal -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
-
-        return result;
     }
 
-    public static MealTo setAllFields(HttpServletRequest req, MealTo meal) {
+    public static void setAllFields(HttpServletRequest req, MealTo meal) {
         meal.setDescription(req.getParameter("description").equals("")? "unknown" : req.getParameter("description"));
         meal.setDateTime(req.getParameter("dateTime").replace("T"," "));
         meal.setCalories(Integer.parseInt(req.getParameter("calories")));
-        return meal;
     }
 }

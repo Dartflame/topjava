@@ -40,8 +40,7 @@ public class MealTo {
 
     public String getDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String formattedString = dateTime.format(formatter);
-        return formattedString;
+        return dateTime.format(formatter);
     }
 
     public String getDescription() {
@@ -58,8 +57,7 @@ public class MealTo {
 
     public void setDateTime(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime formatDateTime = LocalDateTime.parse(dateTime, formatter);
-        this.dateTime = formatDateTime;
+        this.dateTime = LocalDateTime.parse(dateTime, formatter);
     }
 
     public void setDescription(String description) {

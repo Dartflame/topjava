@@ -37,10 +37,6 @@ public class MealToDaoImpl implements MealToDao{
         result.forEach(x -> allMeals.put(x.getId(),x));
     }
 
-    public Map<Long, MealTo> getAllMeals() {
-        return allMeals;
-    }
-
     @Override
     public void createMealTo(MealTo meal) {
         allMeals.put(meal.getId(),meal);
@@ -54,8 +50,7 @@ public class MealToDaoImpl implements MealToDao{
 
     @Override
     public List<MealTo> readAllMeals() {
-        List<MealTo> list = new ArrayList<>(allMeals.values());
-        return list;
+        return new ArrayList<>(allMeals.values());
     }
 
     @Override

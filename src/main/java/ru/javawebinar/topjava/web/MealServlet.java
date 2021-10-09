@@ -32,10 +32,8 @@ public class MealServlet extends HttpServlet {
             request.getRequestDispatcher("/edit.jsp").forward(request, response);
         }
 
-        else{
-            request.setAttribute("mealsList",mealService.readAllMeals());
-            request.getRequestDispatcher("/meals.jsp").forward(request, response);
-        }
+        request.setAttribute("mealsList",mealService.readAllMeals());
+        request.getRequestDispatcher("/meals.jsp").forward(request, response);
 
     }
 
