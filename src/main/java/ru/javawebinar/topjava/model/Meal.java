@@ -29,6 +29,10 @@ public class Meal {
         }
     }
 
+    public int getDateTimeDay() {
+        return dateTime.getDayOfMonth();
+    }
+
     public LocalDateTime getDateTime() {
         return dateTime;
     }

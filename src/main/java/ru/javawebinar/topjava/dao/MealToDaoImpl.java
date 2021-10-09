@@ -4,10 +4,12 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
 import ru.javawebinar.topjava.util.MealsUtil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class MealToDaoImpl implements MealToDao{
 
@@ -31,9 +33,7 @@ public class MealToDaoImpl implements MealToDao{
                 new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Мороженное", 410)
         );
 
-        meals.forEach(x -> System.out.println(x.getId()));
         List<MealTo> result = MealsUtil.mealConvertToMealTo(meals,CALORIES);
-        result.forEach(x -> System.out.println(x.getId()));
         result.forEach(x -> allMeals.put(x.getId(),x));
     }
 
@@ -44,6 +44,7 @@ public class MealToDaoImpl implements MealToDao{
     @Override
     public void createMealTo(MealTo meal) {
         allMeals.put(meal.getId(),meal);
+        defineExcess(meal.getDate());
     }
 
     @Override
@@ -59,11 +60,21 @@ public class MealToDaoImpl implements MealToDao{
 
     @Override
     public void updateMealTo(MealTo meal) {
+        defineExcess(meal.getDate());
         allMeals.put(meal.getId(), meal);
     }
 
     @Override
     public void deleteMealTo(long id) {
+        LocalDate date = allMeals.get(id).getDate();
         allMeals.remove(id);
+        defineExcess(date);
+    }
+
+    private void defineExcess(LocalDate date) {
+        final int[] sum = {0};
+        List<MealTo> result = allMeals.values().stream().filter(x -> x.getDate().equals(date)).collect(Collectors.toList());
+        result.forEach(x -> sum[0] += x.getCalories());
+        result.forEach(x -> x.setExcess(sum[0] > CALORIES));
     }
 }

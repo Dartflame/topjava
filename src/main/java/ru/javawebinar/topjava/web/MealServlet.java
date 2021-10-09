@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.web;
 import org.slf4j.Logger;
 import ru.javawebinar.topjava.dao.MealToDaoImpl;
 import ru.javawebinar.topjava.model.MealTo;
+import ru.javawebinar.topjava.util.MealsUtil;
 
 
 import javax.servlet.ServletException;
@@ -47,24 +48,18 @@ public class MealServlet extends HttpServlet {
         if (action != null && action.equalsIgnoreCase("edit")) {
 
             long mealId = Integer.parseInt(req.getParameter("mealId"));
-
             MealTo meal = mealService.readMealToById(mealId);
-            meal.setDescription(req.getParameter("description"));
-            meal.setDateTime(req.getParameter("dateTime").replace("T"," "));
-            meal.setCalories(Integer.parseInt(req.getParameter("calories")));
+            MealsUtil.setAllFields(req,meal);
 
             mealService.updateMealTo(meal);
         }
         else if(action != null && action.equalsIgnoreCase("create")){
 
             MealTo meal = new MealTo();
-            meal.setDateTime(req.getParameter("dateTime").replace("T"," "));
-            meal.setCalories(Integer.parseInt(req.getParameter("calories")));
-            meal.setDescription(req.getParameter("description"));
-
+            MealsUtil.setAllFields(req,meal);
             mealService.createMealTo(meal);
-        }
 
+        }
         req.setAttribute("mealsList", mealService.readAllMeals());
         req.getRequestDispatcher("/meals.jsp").forward(req, resp);
     }

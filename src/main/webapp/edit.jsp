@@ -23,7 +23,7 @@
         </tr>
         <tr bgcolor="#fffafa">
             <th align="left">Calories:</th>
-            <th align="left"><input type="text" size="10" name="calories"></th>
+            <th align="left"><input type="number" size="10" name="calories"></th>
         </tr>
     </table>
     <button type="submit">Save</button>
