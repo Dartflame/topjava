@@ -32,4 +32,3 @@
 
 </body>
 </html>
-<%--        <button onclick="window.location.href = 'meals?action=insert';">Save</button>--%>
