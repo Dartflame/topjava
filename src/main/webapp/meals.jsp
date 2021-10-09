@@ -11,7 +11,7 @@
 <h3><a href="index.html">Home</a></h3>
 <hr>
 <h2>Meals</h2>
-<button type="button" onclick="window.location.href = 'edit';">Add Meals</button>
+<button type="button" onclick="window.location.href = 'edit?action=create';">Add Meals</button>
 <style>
     th, td {
         padding: 6px;

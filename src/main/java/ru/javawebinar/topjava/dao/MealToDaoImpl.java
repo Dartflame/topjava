@@ -59,10 +59,6 @@ public class MealToDaoImpl implements MealToDao{
 
     @Override
     public void updateMealTo(MealTo meal) {
-//        MealTo update = allMeals.get(meal.getId());
-//        update.setDateTime(meal.getDateTime());
-//        update.setCalories(meal.getCalories());
-//        update.setDescription(meal.getDescription());
         allMeals.put(meal.getId(), meal);
     }
 
