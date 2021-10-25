@@ -1,12 +1,12 @@
 package ru.javawebinar.topjava.model;
 
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 
 import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
 
 public class User extends AbstractNamedEntity {
+
+    private Map<Integer, Meal> userMeal;
 
     private String email;
 
@@ -31,6 +31,11 @@ public class User extends AbstractNamedEntity {
         this.caloriesPerDay = caloriesPerDay;
         this.enabled = enabled;
         this.roles = roles;
+        this.userMeal = new HashMap<>();
+    }
+
+    public Map<Integer, Meal> getUserMeal() {
+        return userMeal;
     }
 
     public String getEmail() {
